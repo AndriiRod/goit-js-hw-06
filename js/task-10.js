@@ -21,8 +21,9 @@ class Box {
 }
 
 let elements = [];
+let inputValue = 0;
 
-refs.btnCreate.addEventListener("click", createBoxes);
+refs.btnCreate.addEventListener("click", checkInput);
 refs.btnDestroy.addEventListener("click", destroyBoxes);
 
 function getRandomHexColor() {
@@ -30,11 +31,17 @@ function getRandomHexColor() {
     .toString(16)
     .padStart(6, 0)}`;
 }
+function checkInput() {
+  if (Number.isInteger(parseInt(refs.input.value.replace(/\s+/g, "")))) {
+    inputValue = parseInt(refs.input.value.replace(/\s+/g, ""));
+    createBoxes();
+  } else alert("Enter an integer!!!");
+}
 
 function createBoxes() {
   let width = 30;
   let height = 30;
-  for (let i = 0; i < parseInt(refs.input.value); i += 1) {
+  for (let i = 0; i < parseInt(inputValue); i += 1) {
     const element = new Box(width, height);
     elements.push(element.createBox());
     width += 10;
