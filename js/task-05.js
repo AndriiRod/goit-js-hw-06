@@ -18,6 +18,7 @@ function ChangingFormText(event) {
 
 function ClearformEntryField() {
   formEntryField.value = "";
+  formText.textContent = defaultValueFormText;
 }
 
 formEntryField.addEventListener("input", ChangingFormText);
