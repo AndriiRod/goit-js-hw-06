@@ -32,10 +32,17 @@ function getRandomHexColor() {
     .padStart(6, 0)}`;
 }
 function checkInput() {
-  if (Number.isInteger(parseInt(refs.input.value.replace(/\s+/g, "")))) {
-    inputValue = parseInt(refs.input.value.replace(/\s+/g, ""));
+  const enteredValue = refs.input.value.replace(/\s+/g, "");
+  const valueMin = parseInt(refs.input.min);
+  const valueMax = parseInt(refs.input.max);
+  if (
+    Number.isInteger(parseInt(enteredValue)) &&
+    parseInt(enteredValue) >= valueMin &&
+    parseInt(enteredValue) <= valueMax
+  ) {
+    inputValue = parseInt(enteredValue);
     createBoxes();
-  } else alert("Enter an integer!!!");
+  } else alert("Enter an integer from 1 to 100!!!");
 }
 
 function createBoxes() {
@@ -52,7 +59,13 @@ function createBoxes() {
 
 function destroyBoxes() {
   elements.length = 0;
-  while (refs.boxes.firstChild) {
-    refs.boxes.children[0].remove();
-  }
+  refs.input.value = "";
+  refs.boxes.innerHTML = "";
 }
+
+// function destroyBoxes() {
+//   elements.length = 0;
+//   while (refs.boxes.firstChild) {
+//     refs.boxes.children[0].remove();
+//   }
+// }
